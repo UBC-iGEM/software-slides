@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/igem.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-auto-animate
+          class="left-align"
+          data-background="public/backgrounds/bits_background.svg"
+        >
+          <div class="row">
+            <div class="col">
+              <h2>Enhancing DNA Storage with Synthetic Biology: Software</h2>
+              <h3 class="highlight"><b>UBC iGEM</b></h3>
+            </div>
+            <!-- <img
+              class="side-img"
+              src="public/images/double-helix-svgrepo-com.svg"
+            /> -->
+          </div>
+        </section>
+        <section
+          data-auto-animate
+          class="left-align"
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Project Description</h2>
+          <p class="r-fit-text">
+            Our project aims to tackle the growing need for a better, more
+            energy-efficient data storage medium compared to current magnetic
+            and optical data storage options by means of synthetic biology.
+            Currently, we aim to achieve this through 2 separate tracks:
+          </p>
+          <p class="r-fit-text fragment">
+            Developing an <b>enzymatic </b>DNA synthesis platform that can
+            elongate a <b>single-stranded </b> DNA (ssDNA) in a
+            <b>template-independent </b> manner. The synthesized ssDNA strand
+            will then be converted to a more stable, double-stranded DNA (dsDNA)
+            and inserted into a plasmid for long-term data storage.
+          </p>
+          <p class="r-fit-text fragment">
+            Developing a <b>data encoding/decoding pipeline</b> that allows
+            binary files (used by computers) to be stored in a ternary format
+            compatible with our DNA synthesis platform, retrieved, and converted
+            back into binary.
+          </p>
+        </section>
+        <section
+          data-auto-animate
+          class="left-align"
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>Goals</h2>
+          <div class="r-fit-text fragment">
+            <h3>In Silico:</h3>
+            Demonstrate ability to encode and decode information someone may
+            store in long-term storage, in the 1000s of nucleotides long.
+          </div>
+          <div class="r-fit-text fragment">
+            <h3>With wet lab:</h3>
+            Demonstrate ability to encode and decode a 100 nucleotide sequence
+            with 30% error.
+          </div>
+        </section>
+        <section
+          data-auto-animate
+          class="left-align"
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Plan</h2>
+          <div class="fragment r-fit-text">
+            <h3>DBTL 1: March to April</h3>
+            <p>
+              Implement a barebones pipeline, and see how much error can be
+              tolerated in 100 nucleotide long DNA sequences with in silico
+              testing.
+            </p>
+          </div>
+          <div class="fragment r-fit-text">
+            <h3>DBTL 2: April to May</h3>
+            <p>
+              Redefine algorithms to tolerate up to 30% error in 100 nucleotide
+              long DNA sequences, with in silico testing.
+            </p>
+          </div>
+          <div class="fragment r-fit-text">
+            <h3>DBTL 3: May to June</h3>
+            <p>
+              Implement DNA Storage Alliance specifications, and do in silico
+              testing on DNA sequences with 1000s of nucleotides.
+            </p>
+          </div>
+          <div class="fragment r-fit-text">
+            <h3>DBTL 4 and 5: June to July</h3>
+            <p>
+              Test our software on sequences synthesized by wet lab, and
+              redefine algorithms with in silico testing and wet lab data.
+            </p>
+          </div>
+        </section>
+        <section class="left-align">
+          <h2>DBTL 1: Components</h2>
+          <h3>1. Encoding</h3>
+          <h3>2. Error Correction</h3>
+          <h3>3. Decoding</h3>
+          <h3>4. ChaosDNA</h3>
+        </section>
+        <section>
+          <h2>Encoding</h2>
+        </section>
+        <section>
+          <h2>Primer Generation</h2>
+          <img src="public/images/primer_gen.svg" />
+        </section>
+        <section>
+          <h2>Error Correction</h2>
+        </section>
+        <section>
+          <h2>Decoding</h2>
+        </section>
+        <section>
+          <h2>ChaosDNA</h2>
+        </section>
+
+        <section>
+          <h2>DBTL 2 and further</h2>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
