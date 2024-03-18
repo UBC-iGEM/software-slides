@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>reveal.js</title>
+    <title>UBC iGEM: Software Slides</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -114,31 +114,203 @@
             </p>
           </div>
         </section>
-        <section class="left-align">
+        <section
+          data-auto-animate
+          class="left-align"
+          data-background="public/backgrounds/molecules_background.svg"
+        >
           <h2>DBTL 1: Components</h2>
-          <h3>1. Encoding</h3>
-          <h3>2. Error Correction</h3>
-          <h3>3. Decoding</h3>
-          <h3>4. ChaosDNA</h3>
+          <h3 class="fragment">1. Encoding</h3>
+          <h3 class="fragment">2. Error Correction</h3>
+          <h3 class="fragment">3. Decoding</h3>
+          <h3 class="fragment">4. ChaosDNA</h3>
         </section>
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/encoding.svg"
+        >
           <h2>Encoding</h2>
+          <ul>
+            <li>Primer Generation</li>
+            <li>Sequence Generation</li>
+          </ul>
         </section>
-        <section>
-          <h2>Primer Generation</h2>
-          <img src="public/images/primer_gen.svg" />
+
+        <section data-background="public/backgrounds/default_background.svg">
+          <h2>Why generate our own primers?</h2>
+          <ul>
+            <li>act as unique identifiers for information</li>
+            <li>required for PCR amplification</li>
+            <li>specify requirements for TdT enzyme</li>
+          </ul>
+          <p>How? Using a genetic algorithm.</p>
         </section>
-        <section>
-          <h2>Error Correction</h2>
+
+        <section data-background="public/backgrounds/info_background.svg">
+          <h2>Why use a genetic algorithm?</h2>
+          <ul>
+            <li>type of optimization algorithm</li>
+            <li>
+              uses a set of constraints to produce heuristics to determine best
+              parent candidates, which go on to produce children population
+            </li>
+          </ul>
+          <p>Primer design fits this description!</p>
         </section>
-        <section>
-          <h2>Decoding</h2>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/default_background.svg"
+        >
+          <h2>Example: two chosen parents</h2>
+          <img src="public/images/primer_gen.png" />
         </section>
-        <section>
-          <h2>ChaosDNA</h2>
+
+        <section data-background="public/backgrounds/info_background.svg">
+          <h2>Schematic</h2>
+          <img class="stretch" src="public/images/schematic-primer-gen.png" />
         </section>
 
         <section>
+          <h2>Code</h2>
+          <pre>
+            <code data-line-numbers="2-6|8|12-16|18-24|26-34|36-45|47-51" >
+              <script type="text/template">
+pub fn generate(
+        total_len: usize,
+        melting_temperature: MeltingTemperature,
+        len_g: usize,
+    ) -> Vec<Self> {
+        let len_no_g = total_len - len_g;
+        let mut initial_primers = Self::generate_initial_primers(len_no_g, len_g);
+        const MUTATION_RATE: f64 = 0.8;
+
+        loop {
+            let parents = initial_primers
+                .choose_multiple_weighted(&mut rand::thread_rng(), Self::POOL_SIZE, |p| {
+                    p.fitness(melting_temperature)
+                })
+                .unwrap();
+
+            let children = parents.tuples().flat_map(|(p1, p2)| {
+                let index = rand::thread_rng().gen_range(0..len_no_g);
+                let c1 = Self([&p1.0[..index], &p2.0[index..]].concat());
+                let c2 = Self([&p2.0[..index], &p1.0[index..]].concat());
+
+                [c1, c2]
+            });
+
+            let mutated_children: Vec<_> = children
+                .map(|mut c| {
+                    if rand::thread_rng().gen_bool(MUTATION_RATE) {
+                        let index = rand::thread_rng().gen_range(0..len_no_g);
+                        c.0[index] = rand::random();
+                    }
+                    c
+                })
+                .collect();
+
+            let good_primers: Vec<_> = mutated_children
+                .iter()
+                .filter(|p| {
+                    p.good_gc_content()
+                        && p.starts_with_gc()
+                        && p.good_melting_temperature(melting_temperature)
+                        && !p.has_hairpin()
+                })
+                .cloned()
+                .collect();
+
+            if !good_primers.is_empty() {
+                return good_primers;
+            } else {
+                initial_primers = mutated_children;
+            }
+        }
+    }
+}
+              </script>
+            </code>
+          </pre>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/default_background.svg"
+        >
+          <h2>Sequence Generation</h2>
+        </section>
+
+        <section
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>Binary to Nucleotides</h2>
+          <p>Some limitations...</p>
+          <ul>
+            <li>short strands (100 nt)</li>
+            <li>semi-specific synthesis</li>
+            <li>high rate of deletion errors (30%)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Short strands?</h2>
+          <p>Blocked data and conversion to ternary</p>
+          <img class="stretch" src="public/images/encode_1.png" />
+          <p>Part 1: proposed encoding scheme</p>
+        </section>
+
+        <section>
+          <h2 class="r-fit-text">Short strands?</h2>
+          <p>Text Compression</p>
+          <img class="stretch" src="public/images/ts_zip-compression.png" />
+        </section>
+
+        <section>
+          <h2>Short strands?</h2>
+          <p>Vector Data Formats</p>
+          TODO
+        </section>
+
+        <section>
+          <h2>Semi-specific synthesis?</h2>
+          <p>Rotation based cipher</p>
+          <img class="stretch" src="public/images/rbc.png" />
+        </section>
+
+        <section>
+          <h2 class="r-fit-text">Rotation based cipher: One char</h2>
+          <img class="stretch" src="public/images/one_char.png" />
+        </section>
+
+        <section>
+          <h2>High rate of deletion errors?</h2>
+          <p class="r-fit-text">For the first iteration, we want to see what percentage of deletion errors we can correct for with minimal error correction. Some ways of resolving deletion errors include:</p>
+          <ul class="r-fit-text">
+            <li><b>synthesizing shorter sequences (more blocks of shorter length)</b></li>
+            <li>more complex encoding methods</li>
+            <li>more complex error correction methods (inner and outer codes)</li>
+            <li><b>choose the most stable DNA strand (starting nucleotide) based on thermodynamic properties</b></li>
+            <li><b>collect metadata and generate a checksum, to be used to sysematically resolve deletion errors</b></li>
+            <ul>
+        </section>
+
+        <section>
+          <h2>Part 2: proposed encoding scheme</h2>
+          <img class="stretch" src="public/images/encode_2.png"/>
+        </section>
+
+        <section>
+          <h2>Entire encoding pipeline</h2>
+          <img src="public/images/seq_gen.png" />
+        </section>
+
+        <section data-auto-animate>
+          <h2>Decoding</h2>
+        </section>
+        <section data-auto-animate>
+          <h2>ChaosDNA</h2>
+        </section>
+        <section data-auto-animate>
           <h2>DBTL 2 and further</h2>
         </section>
       </div>
