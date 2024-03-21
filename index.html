@@ -318,7 +318,10 @@
           </ul>
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>HEDGES Encoding: Inner Codes</h2>
           <img class="stretch" src="public/images/hedges-encode.jpg" />
           <p>Redundacy is enforced in the encoding strategy.</p>
@@ -332,6 +335,31 @@
               >https://doi.org/10.1073/pnas.2004821117</a
             >
           </cite>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>What does this mean?</h2>
+          <p>
+            HEDGES uses a hash function to encode redundancy and generate the
+            base to be synthesized.
+          </p>
+          <p>What's a hash function?</p>
+          <ul>
+            <li>maps data of arbitrary size to a fixed-size value</li>
+            <li>fast to compute hash values</li>
+            <li>
+              very low chance of returning the same hash value for two different
+              hash inputs
+            </li>
+          </ul>
+          <p>
+            Means we can generate a unique checksum for each binary input, which
+            has layers of redundacy in the checksum. It should be very hard for
+            the wrong DNA sequence to genrate the checksum.
+          </p>
         </section>
 
         <section>
