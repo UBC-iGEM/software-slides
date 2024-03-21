@@ -94,7 +94,7 @@
               long DNA sequences, with in silico testing.
             </p>
           </div>
-                 </section>
+        </section>
         <section
           data-auto-animate
           class="left-align"
@@ -102,20 +102,34 @@
         >
           <h2>DBTL 1: Proof of Concept</h2>
           <ul>
-            <li>
-            Encoding
-          </li>
-      <li>
-            Error Correction
-          </li>
-      <li>
-            Decoding
-          </li>
-      <li>
-            ChaosDNA
-          </li>
+            <li>Encoding</li>
+            <li>Error Correction</li>
+            <li>Decoding</li>
+            <li>ChaosDNA</li>
+          </ul>
+        </section>
 
-          </ul>        </section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/crab_background.svg"
+        >
+          <h2>What programming language are we using?</h2>
+          <h3>Rust</h3>
+          <ul>
+            <li>
+              systems programing language that is fast, memory efficient and
+              memory-safe
+            </li>
+            <li>expressive type system, great documentation, robust tooling</li>
+            <li>most admired language among developers</li>
+          </ul>
+          <cite
+            ><a
+              href="https://github.blog/2023-08-30-why-rust-is-the-most-admired-language-among-developers/"
+              >https://github.blog/2023-08-30-why-rust-is-the-most-admired-language-among-developers/</a
+            ></cite
+          >
+        </section>
 
         <section
           data-auto-animate
@@ -129,14 +143,16 @@
         </section>
 
         <section
-  data-auto-animate
+          data-auto-animate
           data-background="public/backgrounds/encoding.svg"
-
-        ><h2>Primer Generation</h2></section>
+        >
+          <h2>Primer Generation</h2>
+        </section>
 
         <section
           data-auto-animate
-          data-background="public/backgrounds/default_background.svg">
+          data-background="public/backgrounds/default_background.svg"
+        >
           <h2>Why generate our own primers?</h2>
           <ul>
             <li>act as unique identifiers for information</li>
@@ -147,9 +163,9 @@
         </section>
 
         <section
-
           data-auto-animate
-          data-background="public/backgrounds/info_background.svg">
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>Why use a genetic algorithm?</h2>
           <ul>
             <li>type of optimization algorithm</li>
@@ -161,10 +177,10 @@
           <p>Primer design fits this description!</p>
         </section>
 
-
         <section
           data-auto-animate
-          data-background="public/backgrounds/info_background.svg">
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>Schematic</h2>
           <img class="stretch" src="public/images/schematic-primer-gen.png" />
         </section>
@@ -177,7 +193,6 @@
           <img src="public/images/primer_gen.png" />
         </section>
 
-
         <section
           data-auto-animate
           data-background="public/backgrounds/default_background.svg"
@@ -189,93 +204,145 @@
           data-background="public/backgrounds/dna_right_corner_backgroud.svg"
         >
           <h2>Binary to Nucleotides</h2>
+          <p>Many encoding formats exist:</p>
+          <ul>
+            <li>Base 4 Encoding: 0 → A, 1 → T, 2 → G, 3 → C</li>
+            <li>Church Encoding: 0 → A or C, 1 → T or G</li>
+            <li>Base 2 Encoding: 00 → A, 11 → T, 01 → G, 10 → C</li>
+            <li>HEDGES Encoding: hash(bit)mod4 → Base 4 Encoding</li>
+          </ul>
+          <p>These encoding methods will ultimately be tested in silico...</p>
+        </section>
+
+        <section
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>Binary to Nucleotides</h2>
           <p>Some limitations...</p>
           <ul>
             <li>short strands (100 nt)</li>
-            <li>semi-specific synthesis</li>
             <li>high rate of deletion errors (30%)</li>
           </ul>
         </section>
 
         <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Short strands?</h2>
+          <p>Blocking data</p>
+          <img class="stretch" src="public/images/block.png" />
+          <ul class="r-fit-text fragment">
+            <li>requires we generate unique primers per strand</li>
+            <li>allows for parallel synthesis of DNA strands</li>
+          </ul>
+        </section>
 
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Short strands?</h2>
+          <p class="r-fit-text fragment">
+            To encode the UBC iGEM sponsorship package...
+          </p>
+          <div class="row fragment">
+            <div style="text-wrap: wrap" class="left-align">
+              <ul>
+                <li>
+                  1.8 MB → 1.8 10<sup>6</sup> bytes → 1.44 * 10<sup>7</sup> bits
+                  → 180000 strands of DNA
+                </li>
+                <li>
+                  assuming each DNA strand's information portion is 80 unique
+                  bases and we are using HEDGES Encoding
+                </li>
+                <li>We will require compression...</li>
+              </ul>
+            </div>
+            <img class="side-img stretch" src="public/images/example.png" />
+          </div>
+        </section>
+
+        <section
           data-auto-animate
           data-background="public/backgrounds/dna_right_corner_backgroud.svg"
         >
           <h2>Short strands?</h2>
-          <p>Blocked data and conversion to ternary</p>
-          <img class="stretch" src="public/images/encode_1.png" />
-          <p>Part 1: proposed encoding scheme</p>
-        </section>
-
-        <section
-
-          data-auto-animate
- data-background="public/backgrounds/dna_right_corner_backgroud.svg"
-        >
-          <h2 class="r-fit-text">Short strands?</h2>
-          <p>Text Compression</p>
           <img class="stretch" src="public/images/ts_zip-compression.png" />
         </section>
 
-        <section
+        <!-- <section
+             data-auto-animate
+             data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+             >
+             <h2>Semi-specific synthesis?</h2>
+             <p>Rotation based cipher</p>
+             <img class="stretch" src="public/images/rbc.png" />
+             </section>
+        -->
 
+        <!-- <section
+             data-auto-animate
+             data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+             >
+             <h2 class="r-fit-text">Rotation based cipher: One char</h2>
+             <img class="stretch" src="public/images/one_char.png" />
+             </section>
+        -->
+
+        <section
           data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2>Short strands?</h2>
-          <p>Vector Data Formats</p>
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>High rate of deletion errors?</h2>
+          <p class="r-fit-text left-align">
+            For the first iteration, we want to see what percentage of deletion
+            errors we can correct for with minimal error correction. Some ways
+            of reducing rate of deletion errors or preventing deletion errors
+            include that we will explore in further DBTLs are:
+          </p>
+          <ul class="r-fit-text">
+            <li>
+              <b
+                >synthesizing shorter sequences (more blocks of shorter
+                length)</b
+              >
+            </li>
+            <li>more complex encoding strategies</li>
+            <li>
+              <b>
+                more complex error correction methods (inner and outer codes)
+              </b>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>HEDGES Encoding: Inner Codes</h2>
+          <img class="stretch" src="public/images/hedges-encode.jpg" />
+          <p>Redundacy is enforced in the encoding strategy.</p>
+          <cite class="citation">
+            Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
+            Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
+            storage corrects indels and allows sequence constraints.
+            <em>Proceedings of the National Academy of Sciences</em>,
+            <em>117</em>(31), 18489–18496.
+            <a href="https://doi.org/10.1073/pnas.2004821117"
+              >https://doi.org/10.1073/pnas.2004821117</a
+            >
+          </cite>
+        </section>
+
+        <section>
+          <h2>HEDGES Encoding: Example</h2>
           TODO
         </section>
 
         <section
-
           data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2>Semi-specific synthesis?</h2>
-          <p>Rotation based cipher</p>
-          <img class="stretch" src="public/images/rbc.png" />
-        </section>
-
-        <section
-
-          data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2 class="r-fit-text">Rotation based cipher: One char</h2>
-          <img class="stretch" src="public/images/one_char.png" />
-        </section>
-
-        <section
-
-          data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2>High rate of deletion errors?</h2>
-          <p class="r-fit-text">For the first iteration, we want to see what percentage of deletion errors we can correct for with minimal error correction. Some ways of reducing rate of deletion errors or preventing deletion errors include:</p>
-          <ul class="r-fit-text">
-            <li><b>synthesizing shorter sequences (more blocks of shorter length)</b></li>
-            <li>more complex encoding methods</li>
-            <li>more complex error correction methods (inner and outer codes)</li>
-            <li><b>choose the most stable DNA strand (starting nucleotide) based on thermodynamic properties</b></li>
-            <li><b>collect metadata and generate a checksum, to be used to sysematically resolve deletion errors</b></li>
-        </ul>
-        </section>
-
-        <section
-          data-auto-animate
-          data-background="public/backgrounds/molecules_background.svg">
-          <h2>Part 2: proposed encoding scheme</h2>
-          <img class="stretch" src="public/images/encode_2.png"/>
-        </section>
-
-        <section
-          data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2>Entire encoding pipeline</h2>
-          <img src="public/images/seq_gen.png" />
-        </section>
-
-        <section
-          data-auto-animate
-          data-background="public/backgrounds/bits_background.svg">
+          data-background="public/backgrounds/bits_background.svg"
+        >
           <h2>Decoding</h2>
           <ul>
             <li>Sequence Alignment</li>
@@ -285,27 +352,105 @@
 
         <section
           data-auto-animate
-          data-background="public/backgrounds/bits_background.svg">
+          data-background="public/backgrounds/bits_background.svg"
+        >
           <h2>Sequence Alignment</h2>
-          <ul><li>Sanger Sequencing</li><li><b>NGS</b></li></ul></section>
-
-             <section
-          data-auto-animate
-          data-background="public/backgrounds/info_background.svg">
-          <h2>De Novo Assembly: NGS</h2>
-          <img class="stretch" src="public/images/seq_align.png">
-                      </section>
-
-
-         <section
-          data-auto-animate
-          data-background="public/backgrounds/dna_right_corner_backgroud.svg">
-          <h2>ChaosDNA</h2>
+          <p>we will most likely use either (or combination of):</p>
+          <ul>
+            <li>Sanger Sequencing</li>
+            <li><b>NGS</b></li>
+          </ul>
         </section>
 
-        <section data-auto-animate>
-          <h2>DBTL 3 and further</h2>
- <div class="fragment r-fit-text">
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Why implement de novo assembly?</h2>
+          <p>No reference template, so de novo assembly is required.</p>
+          <ul>
+            <li>
+              important proof of concept to demonstrate our software can put
+              back together a DNA sequence of 1000s of bases long.
+            </li>
+          </ul>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>De Novo Assembly</h2>
+          <img class="stretch" src="public/images/seq_align.png" />
+          <p>greedy graph search</p>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>Why greedy graph search?</h2>
+          <ul>
+            <li>the exact solution is NP-hard problem</li>
+            <li>
+              our sequences will be at most 1000-3000 bases long, so assuming
+              being greedy will usually yield the exact solution anyways
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Error Correction</h2>
+          <img class="stretch" src="public/images/hedges-decode.jpg" />
+          <cite class="citation">
+            Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
+            Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
+            storage corrects indels and allows sequence constraints.
+            <em>Proceedings of the National Academy of Sciences</em>,
+            <em>117</em>(31), 18489–18496.
+            <a href="https://doi.org/10.1073/pnas.2004821117"
+              >https://doi.org/10.1073/pnas.2004821117</a
+            >
+          </cite>
+        </section>
+
+        <section>
+          <h2>HEDGES Decoding: Example</h2>
+          TODO
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>ChaosDNA</h2>
+          <ul>
+            <li>an in-silico tool for generating faulty DNA sequences</li>
+          </ul>
+          <p>Why?</p>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>ChaosDNA</h2>
+          <ul>
+            <li>an in-silico tool for generating faulty DNA sequences</li>
+            <li>
+              will allow us to prove our software tool can deal with files of
+              more realistic sizes (MB)
+            </li>
+          </ul>
+          <img src="public/images/chaosdna.png" />
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>After DBTL 2?</h2>
+          <div class="fragment r-fit-text">
             <h3>DBTL 3: May to June</h3>
             <p>
               Implement DNA Storage Alliance specifications, and do in silico
@@ -319,7 +464,32 @@
               redefine algorithms with in silico testing and wet lab data.
             </p>
           </div>
+        </section>
 
+        <section>
+          <h2>Future Directions</h2>
+          <ul>
+            <li>DNA Storage Alliance specifications</li>
+            <li>Outer Codes: GC</li>
+            <li>Graphical User Interface</li>
+            <li>SVGs</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>DNA Storage Alliance specifications</h2>
+        </section>
+
+        <section>
+          <h2>Outer Codes: GuessCheck</h2>
+        </section>
+
+        <section>
+          <h2>Graphical User Interface</h2>
+        </section>
+
+        <section>
+          <h2>SVGs</h2>
         </section>
       </div>
     </div>
