@@ -101,7 +101,7 @@
           data-background="public/backgrounds/molecules_background.svg"
         >
           <h2>DBTL 1: Proof of Concept</h2>
-          <ul>
+          <ul class="fragment">
             <li>Encoding</li>
             <li>Error Correction</li>
             <li>Decoding</li>
@@ -114,14 +114,16 @@
           data-background="public/backgrounds/crab_background.svg"
         >
           <h2>What programming language are we using?</h2>
-          <h3>Rust</h3>
+          <h3 class="fragment">Rust</h3>
           <ul>
-            <li>
+            <li class="fragment">
               systems programing language that is fast, memory efficient and
               memory-safe
             </li>
-            <li>expressive type system, great documentation, robust tooling</li>
-            <li>most admired language among developers</li>
+            <li class="fragment">
+              expressive type system, great documentation, robust tooling
+            </li>
+            <li class="fragment">most admired language among developers</li>
           </ul>
           <cite
             ><a
@@ -159,7 +161,7 @@
             <li>required for PCR amplification</li>
             <li>specify requirements for TdT enzyme</li>
           </ul>
-          <p>How? Using a genetic algorithm.</p>
+          <p class="fragment">How? Using a genetic algorithm.</p>
         </section>
 
         <section
@@ -174,7 +176,7 @@
               parent candidates, which go on to produce children population
             </li>
           </ul>
-          <p>Primer design fits this description!</p>
+          <p class="fragment">Primer design fits this description!</p>
         </section>
 
         <section
@@ -206,12 +208,20 @@
           <h2>Binary to Nucleotides</h2>
           <p>Many encoding formats exist:</p>
           <ul>
-            <li>Base 4 Encoding: 0 → A, 1 → T, 2 → G, 3 → C</li>
-            <li>Church Encoding: 0 → A or C, 1 → T or G</li>
-            <li>Base 2 Encoding: 00 → A, 11 → T, 01 → G, 10 → C</li>
-            <li>HEDGES Encoding: hash(bit)mod4 → Base 4 Encoding</li>
+            <li class="fragment">
+              Base 4 Encoding: 0 → A, 1 → T, 2 → G, 3 → C
+            </li>
+            <li class="fragment">Church Encoding: 0 → A or C, 1 → T or G</li>
+            <li class="fragment">
+              Base 2 Encoding: 00 → A, 11 → T, 01 → G, 10 → C
+            </li>
+            <li class="fragment">
+              HEDGES (Auto-Key Encoding): hash(bit)mod4 → Base 4 Encoding
+            </li>
           </ul>
-          <p>These encoding methods will ultimately be tested in silico...</p>
+          <p class="fragment">
+            These encoding methods will ultimately be tested in silico...
+          </p>
         </section>
 
         <section
@@ -220,8 +230,8 @@
           <h2>Binary to Nucleotides</h2>
           <p>Some limitations...</p>
           <ul>
-            <li>short strands (100 nt)</li>
-            <li>high rate of deletion errors (30%)</li>
+            <li class="fragment">short strands (100 nt)</li>
+            <li class="fragment">high rate of deletion errors (30%)</li>
           </ul>
         </section>
 
@@ -233,8 +243,12 @@
           <p>Blocking data</p>
           <img class="stretch" src="public/images/block.png" />
           <ul class="r-fit-text fragment">
-            <li>requires we generate unique primers per strand</li>
-            <li>allows for parallel synthesis of DNA strands</li>
+            <li class="fragment">
+              requires we generate unique primers per strand
+            </li>
+            <li class="fragment">
+              allows for parallel synthesis of DNA strands
+            </li>
           </ul>
         </section>
 
@@ -257,7 +271,7 @@
                   assuming each DNA strand's information portion is 80 unique
                   bases and we are using HEDGES Encoding
                 </li>
-                <li>We will require compression...</li>
+                <li class="fragment">we will require compression...</li>
               </ul>
             </div>
             <img class="side-img stretch" src="public/images/example.png" />
@@ -303,14 +317,14 @@
             include that we will explore in further DBTLs are:
           </p>
           <ul class="r-fit-text">
-            <li>
+            <li class="fragment">
               <b
                 >synthesizing shorter sequences (more blocks of shorter
                 length)</b
               >
             </li>
-            <li>more complex encoding strategies</li>
-            <li>
+            <li class="fragment">more complex encoding strategies</li>
+            <li class="fragment">
               <b>
                 more complex error correction methods (inner and outer codes)
               </b>
@@ -322,7 +336,22 @@
           data-auto-animate
           data-background="public/backgrounds/info_background.svg"
         >
-          <h2>HEDGES Encoding: Inner Codes</h2>
+          <h2>High rate of deletion errors?</h2>
+          <p>HEDGES error-correcting codes: Why?</p>
+          <ul>
+            <li>
+              corrects for mutations and deletions, not prevalent type of error
+              in traditional media storage
+            </li>
+            <li>form of inner code: bits that encode for information</li>
+          </ul>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>HEDGES error-correcting codes</h2>
           <img class="stretch" src="public/images/hedges-encode.jpg" />
           <p>Redundacy is enforced in the encoding strategy.</p>
           <cite class="citation">
@@ -346,25 +375,79 @@
             HEDGES uses a hash function to encode redundancy and generate the
             base to be synthesized.
           </p>
-          <p>What's a hash function?</p>
+          <p class="fragment"><b>What's a hash function?</b></p>
           <ul>
-            <li>maps data of arbitrary size to a fixed-size value</li>
-            <li>fast to compute hash values</li>
-            <li>
+            <li class="fragment">
+              maps data of arbitrary size to a fixed-size value
+            </li>
+            <li class="fragment">fast to compute hash values</li>
+            <li class="fragment">
               very low chance of returning the same hash value for two different
               hash inputs
             </li>
           </ul>
           <p>
-            Means we can generate a unique checksum for each binary input, which
-            has layers of redundacy in the checksum. It should be very hard for
-            the wrong DNA sequence to genrate the checksum.
+            We will also use a established checksum algorithm to generate a
+            checksum to signal if error correction is needed.
           </p>
         </section>
 
-        <section>
-          <h2>HEDGES Encoding: Example</h2>
-          TODO
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>HEDGES error-correcting codes: Rationale</h2>
+          <p>
+            "Hashing each bit value withits strand ID, bit index, and a few
+            previous bits “poisons” bad decoding hypotheses, allowing for
+            correction of indels."
+          </p>
+          <p>
+            "In summary, the algorithm encodes information as a stream of
+            nucleotides such that any single decoding error in either nucleotide
+            identity or nucleotide position will “poison” the downstream
+            predictions. Thus, on decoding, there will be onlyone good-scoring
+            chain of guesses—the correct one."
+          </p>
+          <cite class="citation">
+            Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
+            Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
+            storage corrects indels and allows sequence constraints.
+            <em>Proceedings of the National Academy of Sciences</em>,
+            <em>117</em>(31), 18489–18496.
+            <a href="https://doi.org/10.1073/pnas.2004821117"
+              >https://doi.org/10.1073/pnas.2004821117</a
+            >
+          </cite>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>HEDGES error-correcting codes: Rationale</h2>
+          <ul>
+            <li>
+              designed with orthogonality in mind: can add other error
+              correction codes without interference, such as RSC
+            </li>
+            <li>
+              variable paramters, so we can tune to our specific DNA synthesis
+            </li>
+            <li>MIT license, implementions online in C++ and Python</li>
+          </ul>
+          <br />
+          <br />
+          <cite class="citation">
+            Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
+            Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
+            storage corrects indels and allows sequence constraints.
+            <em>Proceedings of the National Academy of Sciences</em>,
+            <em>117</em>(31), 18489–18496.
+            <a href="https://doi.org/10.1073/pnas.2004821117"
+              >https://doi.org/10.1073/pnas.2004821117</a
+            >
+          </cite>
         </section>
 
         <section
@@ -385,8 +468,8 @@
           <h2>Sequence Alignment</h2>
           <p>we will most likely use either (or combination of):</p>
           <ul>
-            <li>Sanger Sequencing</li>
-            <li><b>NGS</b></li>
+            <li class="fragment">Sanger Sequencing</li>
+            <li class="fragment"><b>NGS</b></li>
           </ul>
         </section>
 
@@ -394,12 +477,14 @@
           data-auto-animate
           data-background="public/backgrounds/info_background.svg"
         >
-          <h2>Why implement de novo assembly?</h2>
-          <p>No reference template, so de novo assembly is required.</p>
+          <h2>De Novo Assembly</h2>
+          <p>Why implement de novo assembly?</p>
+
           <ul>
+            <li>no reference template, so de novo assembly is required</li>
             <li>
               important proof of concept to demonstrate our software can put
-              back together a DNA sequence of 1000s of bases long.
+              back together a DNA sequence of 1000s of bases long
             </li>
           </ul>
         </section>
@@ -419,17 +504,44 @@
         >
           <h2>Why greedy graph search?</h2>
           <ul>
-            <li>the exact solution is NP-hard problem</li>
-            <li>
-              our sequences will be at most 1000-3000 bases long, so assuming
-              being greedy will usually yield the exact solution anyways
+            <li class="fragment">the exact solution is NP-hard problem</li>
+            <li class="fragment">
+              our sequences will be at most 1000-3000 bases long, so being
+              greedy will usually yield the exact solution anyways
             </li>
           </ul>
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>Error Correction</h2>
-          <img class="stretch" src="public/images/hedges-decode.jpg" />
+          <p>How does this work?</p>
+          <ul>
+            <li>
+              we are given a DNA sequence, and assuming we have correctly
+              decoded bits[0...i-1], and we want bits[i]
+            </li>
+            <li>
+              we use the hash function from encoding stage to "guess" what the
+              correct base should be
+            </li>
+            <li>
+              if we correctly guess the base, we continue searching that branch,
+              otherwise assign a cumulative penality score or abandon that
+              branch
+            </li>
+          </ul>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>HEDGES error-correction code: Reminder</h2>
+          <img class="stretch" src="public/images/full-hedges.png" />
+          <br />
           <cite class="citation">
             Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
             Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
@@ -442,9 +554,22 @@
           </cite>
         </section>
 
-        <section>
-          <h2>HEDGES Decoding: Example</h2>
-          TODO
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
+          <h2>Error Correction</h2>
+          <img class="stretch" src="public/images/hedges-decode.jpg" />
+          <cite class="citation">
+            Press, W. H., Hawkins, J. A., Jones, S. K., Schaub, J. M., &amp;
+            Finkelstein, I. J. (2020). HEDGES error-correcting code for DNA
+            storage corrects indels and allows sequence constraints.
+            <em>Proceedings of the National Academy of Sciences</em>,
+            <em>117</em>(31), 18489–18496.
+            <a href="https://doi.org/10.1073/pnas.2004821117"
+              >https://doi.org/10.1073/pnas.2004821117</a
+            >
+          </cite>
         </section>
 
         <section
@@ -498,7 +623,10 @@
           </div>
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/dna_right_corner_backgroud.svg"
+        >
           <h2>Future Directions</h2>
           <ul>
             <li>DNA Storage Alliance specifications</li>
@@ -508,20 +636,57 @@
           </ul>
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>DNA Storage Alliance specifications</h2>
+          <p>
+            "Unlike traditional storage media such as tape, HDD, and SSD, DNA
+            does not have a fixed physical structure, a built-in controller, or
+            a way to address different regions of the media linearly, and thus
+            needs a mechanism to start reading or “booting up” a DNA archive
+            that does not rely on such a structure. The SNIA DNA Archive Rosetta
+            Stone (DARS) working group, one of four working groups in the DNA
+            Data Storage Alliance aimed at defining standards for DNA data
+            storage systems, has developed two specifications to enable archive
+            readers to find the sequence to begin booting up the data."
+          </p>
+          <cite
+            ><a
+              href="https://www.snia.org/news_events/newsroom/dna-data-storage-alliance-releases-its-first-specifications"
+              >https://www.snia.org/news_events/newsroom/dna-data-storage-alliance-releases-its-first-specifications</a
+            ></cite
+          >
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>Outer Codes: GuessCheck</h2>
         </section>
 
-        <section>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
           <h2>Graphical User Interface</h2>
         </section>
 
-        <section>
-          <h2>SVGs</h2>
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/info_background.svg"
+        >
+          <h2>QR Codes and SVGs</h2>
+        </section>
+
+        <section
+          data-auto-animate
+          data-background="public/backgrounds/bits_background.svg"
+        >
+          <h1>Thank you!</h1>
+          <h3>Questions?</h3>
         </section>
       </div>
     </div>
