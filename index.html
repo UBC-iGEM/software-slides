@@ -665,7 +665,14 @@
           data-auto-animate
           data-background="public/backgrounds/info_background.svg"
         >
-          <h2>Outer Codes: GuessCheck</h2>
+          <h2>Outer Codes: Guess & Check+</h2>
+          <p>Correcting Insertions and Deletions in Short DNA sequences</p>
+          <ul>
+            <li>Uses Reed-Solomon outer code to encode redundancies</li>
+            <li>Within redundant bits, portion of the bits store different possible indel patterns as 'guesses'</li>
+            <li>Rest of the parity bits encoded are 'checks' i.e. repetitive bits, used to check against guessed indel pattern</li>
+          </ul>
+          <img src="public/images/gc_layman.png" />
         </section>
 
         <section
